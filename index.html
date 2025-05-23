@@ -30,9 +30,20 @@
       position: relative;
       width: 600px;
       height: 300px;
-      background-color: black;
-      overflow: hidden;
       border: 4px solid white;
+      overflow: hidden;
+      background: url('https://i.ibb.co/tZzF2mB/clouds.png') repeat-x;
+      background-size: cover;
+      animation: clouds 60s linear infinite;
+    }
+
+    @keyframes clouds {
+      from {
+        background-position: 0 0;
+      }
+      to {
+        background-position: -1000px 0;
+      }
     }
 
     .bouncing-text {
@@ -40,12 +51,7 @@
       font-size: 24px;
       color: #39ff14;
       white-space: nowrap;
-      text-shadow: 0 0 5px #39ff14, 0 0 10px #39ff14, 0 0 15px #39ff14;
       transition: color 0.2s, font-family 0.2s;
-    }
-
-    .font-preview {
-      margin: 5px 0;
     }
   </style>
 </head>
@@ -57,9 +63,6 @@
       <div class="bouncing-text">SkyCodeWorks</div>
     </div>
   </div>
-
-  <h2>Web-Safe Fonts</h2>
-  <!-- font preview area remains the same -->
 
   <script>
     const text = document.querySelector('.bouncing-text');
@@ -78,17 +81,14 @@
       const boxWidth = box.clientWidth;
       const boxHeight = box.clientHeight;
 
-      let hitSide = false;
       let hitCorner = false;
 
       if (x + dx <= 0 || x + dx + textWidth >= boxWidth) {
         dx *= -1;
-        hitSide = true;
       }
 
       if (y + dy <= 0 || y + dy + textHeight >= boxHeight) {
         dy *= -1;
-        hitSide = true;
       }
 
       x += dx;
@@ -106,17 +106,8 @@
         hitCorner = true;
       }
 
-      if (hitSide) {
-        // Change color
-        const color = neonColors[Math.floor(Math.random() * neonColors.length)];
-        text.style.color = color;
-        text.style.textShadow = `0 0 5px ${color}, 0 0 10px ${color}, 0 0 15px ${color}`;
-
-        // Change font
-        text.style.fontFamily = fonts[Math.floor(Math.random() * fonts.length)];
-      }
-
       if (hitCorner) {
+        text.style.fontFamily = fonts[Math.floor(Math.random() * fonts.length)];
         showingHello = !showingHello;
         text.textContent = showingHello ? "Hello!" : "SkyCodeWorks";
       }
