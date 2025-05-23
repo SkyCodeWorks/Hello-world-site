@@ -8,67 +8,63 @@
 
   <style>
     body {
+      margin: 0;
+      font-family: Arial, sans-serif;
       background-color: #0d4a11;
       color: white;
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 20px;
     }
 
-    h1 {
-      font-family: 'Bradley Hand', cursive;
-      text-align: center;
-    }
-
-    .bouncing-section {
-      display: flex;
-      justify-content: center;
-      margin: 40px 0;
-    }
-
-    .box {
+    .hero {
       position: relative;
-      width: 600px;
-      height: 300px;
-      border: 4px solid white;
+      height: 400px;
+      width: 100%;
       overflow: hidden;
-      background: url('https://i.ibb.co/tZzF2mB/clouds.png') repeat-x;
+      background: linear-gradient(to bottom, transparent 70%, #0d4a11),
+                  url('https://i.ibb.co/tZzF2mB/clouds.png') repeat-x;
       background-size: cover;
       animation: clouds 60s linear infinite;
     }
 
     @keyframes clouds {
-      from {
-        background-position: 0 0;
-      }
-      to {
-        background-position: -1000px 0;
-      }
+      from { background-position: 0 0; }
+      to { background-position: -1000px 0; }
     }
 
     .bouncing-text {
       position: absolute;
-      font-size: 24px;
+      font-size: 32px;
+      font-weight: bold;
       color: #39ff14;
       white-space: nowrap;
-      transition: color 0.2s, font-family 0.2s;
+      transition: font-family 0.2s;
+    }
+
+    h1 {
+      text-align: center;
+      font-family: 'Bradley Hand', cursive;
+      margin: 30px;
+    }
+
+    .content {
+      padding: 40px 20px;
     }
   </style>
 </head>
 <body>
+  <div class="hero">
+    <div class="bouncing-text">SkyCodeWorks</div>
+  </div>
+
   <h1>Welcome to SkyCodeWorks!</h1>
 
-  <div class="bouncing-section">
-    <div class="box">
-      <div class="bouncing-text">SkyCodeWorks</div>
-    </div>
+  <div class="content">
+    <p>This is the start of your site content. Scroll for more ideas or sections later.</p>
   </div>
 
   <script>
     const text = document.querySelector('.bouncing-text');
-    const box = document.querySelector('.box');
+    const hero = document.querySelector('.hero');
 
-    const neonColors = ['#39ff14', '#00ffff', '#ff00ff', '#ffff00', '#ff1493', '#00ff00'];
     const fonts = ['Arial', 'Courier New', 'Georgia', 'Impact', 'Comic Sans MS', 'Lucida Handwriting', 'Papyrus'];
 
     let x = 50, y = 50;
@@ -78,16 +74,16 @@
     function bounce() {
       const textWidth = text.offsetWidth;
       const textHeight = text.offsetHeight;
-      const boxWidth = box.clientWidth;
-      const boxHeight = box.clientHeight;
+      const heroWidth = hero.clientWidth;
+      const heroHeight = hero.clientHeight;
 
       let hitCorner = false;
 
-      if (x + dx <= 0 || x + dx + textWidth >= boxWidth) {
+      if (x + dx <= 0 || x + dx + textWidth >= heroWidth) {
         dx *= -1;
       }
 
-      if (y + dy <= 0 || y + dy + textHeight >= boxHeight) {
+      if (y + dy <= 0 || y + dy + textHeight >= heroHeight) {
         dy *= -1;
       }
 
@@ -99,9 +95,9 @@
 
       if (
         (x <= 0 && y <= 0) ||
-        (x + textWidth >= boxWidth && y <= 0) ||
-        (x <= 0 && y + textHeight >= boxHeight) ||
-        (x + textWidth >= boxWidth && y + textHeight >= boxHeight)
+        (x + textWidth >= heroWidth && y <= 0) ||
+        (x <= 0 && y + textHeight >= heroHeight) ||
+        (x + textWidth >= heroWidth && y + textHeight >= heroHeight)
       ) {
         hitCorner = true;
       }
